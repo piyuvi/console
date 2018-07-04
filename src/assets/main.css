@@ -15,7 +15,7 @@ a {
 }
 
 a:hover{
-  background-color: #515354 !important;  
+  color: #515354 !important;  
   text-decoration: none;
 }
 
@@ -34,7 +34,7 @@ html{
 }
 
 .md-field .md-theme-default{
-  margin-top: -50px !important;
+  margin-top: -50px ;
 }
 
 .md-field .md-textarea{
@@ -98,7 +98,8 @@ html{
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link{
-  background-color: #515354 !important
+  background-color: #515354 !important;
+  color:#fff !important
 }
 
 .card-header{
