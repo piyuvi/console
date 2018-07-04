@@ -77,13 +77,13 @@ html{
 
 .fa-angle-left:before{
   position: relative;
-  top: 200%;
+  top: 175%;
   left: -100%;
 }
 
 .fa-times-circle:before{
   position: relative;
-  top: 100%;
+  top: 80%;
   left: -100%;
 }
 
@@ -108,5 +108,9 @@ html{
 
 .help{
   margin-top:15px !important;
+}
+
+.atwho-ul{
+  width:10% !important
 }
 
