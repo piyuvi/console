@@ -50,7 +50,6 @@ export default {
       commandInput:'',
       logs:[],
       fields:[{commandInput:'',readonly:false, showOutput:false, commandOutput:[], callbackFlag:false, afterConsole:''}],
-      // commandLength:0,
       history:[],
       getHistoricalData:[],
       members: [],
@@ -91,7 +90,7 @@ export default {
       this.fields.push({commandInput:'',readonly:false, showOutput:false,commandOutput:[], afterConsole:''})      
       },1000)
       this.setHistory(this.fields)
-      this.execute(field)
+      this.execute(field) //carries out the function of pushing log messages
     },
     execute(field){
       field.commandOutput=[]
@@ -116,6 +115,7 @@ export default {
       }
     },
     consoleLog(...message){
+      //to check for an object
       if(typeof(message[0])=='object' && !Array.isArray(message[0]))
       {
         var output='Object { '
@@ -128,6 +128,7 @@ export default {
         output+=' }'
         message[0]=output
       }
+      //to check for a array
       if(Array.isArray(message[0]))
       message[0]='Array('+message[0].length+')'+' ['+message+']'
 
@@ -187,9 +188,6 @@ export default {
     getHistory(){
       var retrievedData = sessionStorage.getItem("history")
       this.getHistoricalData = JSON.parse(retrievedData)
-      // if(this.getHistoricalData!=null)
-      // // this.commandLength=this.getHistoricalData.length
-      // // this.upKeyCount=this.commandLength
     },
     printHistory(field){
       if(this.getHistoricalData!=null){
@@ -200,9 +198,6 @@ export default {
       else
       field.commandOutput.push({message:'You haven\'t played around here yet !',style:'primary'})
     },
-    here(){
-      console.log("here")
-    }
   },
   created(){
     this.getHistory()
