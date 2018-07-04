@@ -119,7 +119,7 @@ export default {
       if(typeof(message[0])=='object' && !Array.isArray(message[0]))
       {
         var output='Object { '
-        for (var property in message[0]) {
+        for (let property in message[0]) {
           if(typeof(message[0][property])=='string')
           output += property + ': ' +'"'+ message[0][property]+'"'+'; ';
           else
@@ -129,9 +129,26 @@ export default {
         message[0]=output
       }
       //to check for a array
-      if(Array.isArray(message[0]))
-      message[0]='Array('+message[0].length+')'+' ['+message+']'
-
+      if(Array.isArray(message[0])){
+      var output1=''
+      for(let i=0;i<message[0].length;i++)
+      {
+        if(typeof(message[0][i])=='object' && !Array.isArray(message[0][i]))//object inside an array
+        {
+         output1='[ { '
+        for (var property in message[0][i]) {
+          if(typeof(message[0][i][property])=='string')
+          output1 += property + ': ' +'"'+ message[0][i][property]+'"'+' ';
+          else
+          output1 += property + ': ' + message[0][i][property]+' ';
+        }
+        output1+=' } ]'
+        }
+        else
+        output1=' [ '+message[0]+' ] '
+      }
+      message[0]='Array('+message[0].length+')'+output1
+      }
 			this.logs.push({
 				message: message[0],
 				style: 'primary'
