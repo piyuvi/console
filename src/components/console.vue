@@ -138,9 +138,9 @@ export default {
          output1='[ { '
         for (var property in message[0][i]) {
           if(typeof(message[0][i][property])=='string')
-          output1 += property + ': ' +'"'+ message[0][i][property]+'"'+' ';
+          output1 += property + ': ' +'"'+ message[0][i][property]+'"'+'; ';
           else
-          output1 += property + ': ' + message[0][i][property]+' ';
+          output1 += property + ': ' + message[0][i][property]+'; ';
         }
         output1+=' } ]'
         }
