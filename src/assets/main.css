@@ -98,7 +98,7 @@ html{
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link{
-  background-color: #515354
+  background-color: #515354 !important
 }
 
 .card-header{
