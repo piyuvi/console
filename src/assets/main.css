@@ -15,7 +15,7 @@ a {
 }
 
 a:hover{
-  color: #515354 !important;  
+  background-color: #515354 !important;  
   text-decoration: none;
 }
 
