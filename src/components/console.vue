@@ -206,7 +206,7 @@ export default {
   },
   created(){
     this.getHistory()
-    // console.log = this.consoleLog
+    console.log = this.consoleLog
     console.error = this.consoleError
     console.warn = this.consoleWarn
     console.clear = this.consoleClear
