@@ -16,7 +16,7 @@ a {
 
 a:hover{
   color: #515354 !important;  
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 html{
@@ -24,7 +24,7 @@ html{
 }
 
 .md-field{
-  padding-top: 0px ;
+  padding-top: 0px !important;
 }
 
 .md-field .md-input, .md-field .md-textarea{
@@ -34,7 +34,7 @@ html{
 }
 
 .md-field .md-theme-default{
-  margin-top: -50px ;
+  margin-top: -40px !important;
 }
 
 .md-field .md-textarea{
