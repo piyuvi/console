@@ -10,7 +10,7 @@ li {
   margin: 0 10px !important;
 }
 a {
-  color: #515354 ;
+  color: #515354 !important;
   text-decoration: none ;
 }
 
@@ -38,8 +38,8 @@ html{
 }
 
 .md-field .md-textarea{
-  max-height: 100% !important;
-  height:100% !important;
+  max-height: 100% ;
+  height:100% ;
   overflow: hidden !important;
 }
 
