@@ -6,49 +6,49 @@ ul {
   padding: 0;
 }
 li {
-  display: inline-block;
-  margin: 0 10px;
+  display: inline-block !important;
+  margin: 0 10px !important;
 }
 a {
-  color: #515354;
-  text-decoration: none;
+  color: #515354 !important;
+  text-decoration: none !important;
 }
 
 a:hover{
-  color: #515354;  
+  color: #515354 !important;  
   text-decoration: none !important;
 }
 
 html{
-  height:84%;
+  height:84% !important;
 }
 
 .md-field{
-  padding-top: 0px;
+  padding-top: 0px !important;
 }
 
 .md-field .md-input, .md-field .md-textarea{
-  border-bottom: 1px solid;
-  border-color: beige;
-  overflow: hidden;
+  border-bottom: 1px solid !important;
+  border-color: beige !important;
+  overflow: hidden !important;
 }
 
 .md-field .md-theme-default{
-  margin-top: -50px;
+  margin-top: -50px !important;
 }
 
 .md-field .md-textarea{
-  max-height: 100%;
-  height:100%;
-  overflow: hidden;
+  max-height: 100% !important;
+  height:100% !important;
+  overflow: hidden !important;
 }
 
 .autogrow{
   overflow: hidden !important;
-  position: relative;
+  position: relative !important;
   /* margin-top: 30px;  */
-  margin-left: -25px;  
-  width:98%;
+  margin-left: -25px !important;  
+  width:98% !important;
 }
 
 .label-primary{
@@ -88,13 +88,13 @@ html{
 }
 
 .atwho-wrap{
-  display: flex;
-    width: 97%;
+  display: flex !important;
+    width: 97% !important;
 }
 
 .atwho-view {
-    position: relative;
-    margin-top: 20%;
+    position: relative !important;
+    margin-top: 20% !important;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link{
@@ -102,10 +102,10 @@ html{
 }
 
 .card-header{
-  margin-top: -51px;
+  margin-top: -51px !important;
 }
 
 .help{
-  margin-top:15px;
+  margin-top:15px !important;
 }
 
