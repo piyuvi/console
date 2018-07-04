@@ -46,7 +46,7 @@ export default{
   '3. To clear console use "console.clear()"',
   'Limitations as of now:',
   '1. Unable to use up/down arrow keys on the textarea to go back to the previous command.',
-  '2. Autocomplete dropdown does not show the complete list of available Javascript commands.'
+  '2. Autocomplete dropdown list is not exhaustive.'
 ]    
 ,
 
