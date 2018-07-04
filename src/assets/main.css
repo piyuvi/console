@@ -10,13 +10,13 @@ li {
   margin: 0 10px !important;
 }
 a {
-  color: #515354 !important;
-  text-decoration: none !important;
+  color: #515354 ;
+  text-decoration: none ;
 }
 
 a:hover{
   color: #515354 !important;  
-  text-decoration: none !important;
+  text-decoration: none;
 }
 
 html{
@@ -24,7 +24,7 @@ html{
 }
 
 .md-field{
-  padding-top: 0px !important;
+  padding-top: 0px ;
 }
 
 .md-field .md-input, .md-field .md-textarea{
