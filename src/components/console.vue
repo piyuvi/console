@@ -50,7 +50,6 @@ export default {
       commandInput:'',
       logs:[],
       fields:[{commandInput:'',readonly:false, showOutput:false, commandOutput:[], callbackFlag:false, afterConsole:''}],
-      history:[],
       getHistoricalData:[],
       members: [],
       inputArray:[],
@@ -90,7 +89,7 @@ export default {
       setTimeout(()=>{
       this.fields.push({commandInput:'',readonly:false, showOutput:false,commandOutput:[], afterConsole:''})      
       },1000)
-      this.setHistory(this.fields)
+      this.setHistory(field.commandInput)
       this.execute(field) //carries out the function of pushing log messages
     },
     execute(field){
@@ -202,11 +201,11 @@ export default {
       else
       this.inputValue=this.inputField
     },
-    setHistory(fields){
-      this.history=[]
-      fields.filter((field)=>{
-        this.history.push(field.commandInput)})
-      sessionStorage.setItem('history',JSON.stringify(this.history)) 
+    setHistory(field){
+      if(this.getHistoricalData==null)
+        this.getHistoricalData=[]
+      this.getHistoricalData.push(field)
+      sessionStorage.setItem('history',JSON.stringify(this.getHistoricalData)) 
       this.getHistory()     
     },
     getHistory(){
