@@ -8,7 +8,7 @@
       <b-row>
         <md-icon class="fa fa-angle-right"></md-icon>
         <at-ta :members="matches" :ats="atsFilter" v-model="field.commandInput">
-        <md-textarea v-focus="true" @input="change(field.commandInput)" @keydown.enter.prevent class="autogrow" @keyup.ctrl.down="nextCommands(field)" @keyup.ctrl.up="prevCommands(field)"  v-model="field.commandInput" v-on:keyup.enter="onSubmit(field)" md-autogrow :readonly="field.readonly">
+        <md-textarea v-focus="true" @input="change(field.commandInput)" @keydown.enter.prevent class="autogrow" v-model="field.commandInput" v-on:keyup.enter="onSubmit(field)" md-autogrow :readonly="field.readonly">
         </md-textarea>
         </at-ta>
       </b-row>
@@ -16,9 +16,8 @@
         <span v-if="field.showOutput" :class="'label-' + log.style">
            <md-icon v-if="log.style=='danger'" class="fa fa-times-circle"></md-icon>
            <md-icon v-else class="fa fa-angle-left"></md-icon>
-          <div v-if="log.message=='undefined'">{{log.message}}</div>
-          <div v-if="errorFlag">{{log.message}}</div>
-          <tree-view v-else :data="log.message" :options="{maxDepth: 5,rootObjectKey:'output'}"></tree-view>
+          <div v-if="!log.type">{{log.message}}</div>
+          <tree-view v-if="log.type" :data="log.message" :options="{maxDepth: 7,rootObjectKey:log.header}"></tree-view>
         </span>
       </b-row>
     </b-container>
@@ -62,8 +61,7 @@ export default {
       inputValue:'',
       autocomplete:'',
       showHelp:[],
-      objectInsideArray:false,
-      errorFlag:false
+      nonPrimitive:false
     }
   },
   computed:{
@@ -83,8 +81,6 @@ export default {
   },
   methods:{
     onSubmit(field){
-      this.upKeyCount=0
-      this.downKeyCount=0
       if(field.commandInput.trim() =='') return false;
       field.showOutput=true
       field.readonly=true
@@ -104,25 +100,40 @@ export default {
         try{
         this.logs.push({
           message: (window.eval(field.commandInput) ? eval(field.commandInput) : 'undefined'),
-          style: 'primary'
+          style: 'primary',
+          type:false,
+          header:''
         })
         }
         catch(e){
           this.errorFlag=true
           this.logs.push({
             message:e.toString(),
-            style:'danger'
+            style:'danger',
+            type:false,
+            header:''
           })
         }
         this.logs.filter((log)=>{
-          field.commandOutput.push({message:log.message,style:log.style})
+          field.commandOutput.push({message:log.message,style:log.style,type:log.type,header:log.header})
         })
       }
     },
     consoleLog(...message){
+      if(typeof(message[0])=='object'){
+        if(Array.isArray(message[0]))
+        this.header='Array ('+message[0].length+')'
+        else
+        this.header='Object'
+        this.nonPrimitive=true
+      }
+      else
+        this.nonPrimitive=false;
 			this.logs.push({
 				message: message[0],
-				style: 'primary'
+        style: 'primary',
+        type:this.nonPrimitive,
+        header:this.header
       })
     },
     consoleError(...message){
@@ -156,6 +167,8 @@ export default {
     consoleClear(){
       this.logs=[]
       this.fields=[]
+      this.getHistoricalData=[]
+      sessionStorage.removeItem('history')
     },
     change(field){
       this.inputField=field
@@ -178,13 +191,9 @@ export default {
       this.getHistoricalData = JSON.parse(retrievedData)
     },
     printHistory(field){
-      if(this.getHistoricalData!=null){
         this.getHistoricalData.filter((history)=>{
-          field.commandOutput.push({message:history,style:'primary'})
+          field.commandOutput.push({message:history,style:'primary',type:false,header:''})
         })
-      }
-      else
-      field.commandOutput.push({message:'You haven\'t played around here yet !',style:'primary'})
     },
   },
   created(){
