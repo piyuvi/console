@@ -16,7 +16,9 @@
         <span v-if="field.showOutput" :class="'label-' + log.style">
            <md-icon v-if="log.style=='danger'" class="fa fa-times-circle"></md-icon>
            <md-icon v-else class="fa fa-angle-left"></md-icon>
-          {{log.message}}
+          <div v-if="log.message=='undefined'">{{log.message}}</div>
+          <div v-if="errorFlag">{{log.message}}</div>
+          <tree-view v-else :data="log.message" :options="{maxDepth: 5,rootObjectKey:'output'}"></tree-view>
         </span>
       </b-row>
     </b-container>
@@ -36,6 +38,7 @@
 <script>
 import AtTa from 'vue-at/dist/vue-at-textarea'
 import filterdata from '../data/data.js'
+
 const focus = {
   inserted(el) {
     el.focus()
@@ -59,7 +62,8 @@ export default {
       inputValue:'',
       autocomplete:'',
       showHelp:[],
-      objectInsideArray:false
+      objectInsideArray:false,
+      errorFlag:false
     }
   },
   computed:{
@@ -104,6 +108,7 @@ export default {
         })
         }
         catch(e){
+          this.errorFlag=true
           this.logs.push({
             message:e.toString(),
             style:'danger'
@@ -115,46 +120,6 @@ export default {
       }
     },
     consoleLog(...message){
-      //to check for an object
-      if(typeof(message[0])=='object' && !Array.isArray(message[0]))
-      {
-        var output='Object { '
-        for (let property in message[0]) {
-          if(typeof(message[0][property])=='string')
-          output += property + ': ' +'"'+ message[0][property]+'"'+'; ';
-          else
-          output += property + ': ' + message[0][property]+'; ';
-        }
-        output+=' }'
-        message[0]=output
-      }
-      //to check for a array
-      if(Array.isArray(message[0])){
-      var tempVal='';
-      var storeValue='[ '
-      for(let i=0;i<message[0].length;i++)
-      { 
-        if(typeof(message[0][i])=='object' && !Array.isArray(message[0][i]))//object inside an array
-        {
-        this.objectInsideArray=true
-         tempVal=' { '
-        for (var property in message[0][i]) {
-          if(typeof(message[0][i][property])=='string')
-          tempVal += property + ': ' +'"'+ message[0][i][property]+'"';
-          else
-          tempVal += property + ': ' + message[0][i][property];
-        }
-        tempVal+=' } '
-        }
-        else
-        this.objectInsideArray=false
-        storeValue+=tempVal
-      }
-      if(this.objectInsideArray)
-      message[0]='Array('+message[0].length+')'+ storeValue+' ]'
-      else
-      message[0]='Array('+message[0].length+') [ '+message[0]+' ]'
-      }
 			this.logs.push({
 				message: message[0],
 				style: 'primary'

@@ -8,6 +8,8 @@ import 'vue-material/dist/vue-material.css'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import TreeView from "vue-json-tree-view"
+Vue.use(TreeView)
 Vue.use(BootstrapVue);
 Vue.use(VueMaterial)
 Vue.config.productionTip = false
